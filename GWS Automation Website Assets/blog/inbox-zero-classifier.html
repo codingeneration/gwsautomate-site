@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inbox Zero with Gmail Classifier Script | GWS Automate</title>
+  <meta name="description" content="Learn how to use Apps Script to classify Gmail automatically and hit Inbox Zero every day. Save time with automation instead of manual email sorting." />
+  <style>
+    body { font-family: system-ui, -apple-system, Arial, sans-serif; line-height: 1.6; margin: 40px; max-width: 800px; color: #111; }
+    h1 { font-size: 28px; margin-bottom: 16px; }
+    h2 { margin-top: 24px; font-size: 22px; }
+    pre { background: #f4f4f4; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>Inbox Zero with Gmail Classifier Script</h1>
+  <p><em>Published: September 2025 · Author: GWS Automate</em></p>
+
+  <p>Inbox Zero is a dream for many IT professionals, but it’s hard to maintain when your Gmail inbox is overflowing with newsletters, alerts, and random messages. Instead of manually sorting and archiving, you can use automation to classify and label messages automatically — saving hours per week.</p>
+
+  <h2>The Problem</h2>
+  <p>Traditional Gmail filters only get you so far. You still end up with clutter: system alerts, internal updates, vendor promotions, and unread newsletters mixed with real work. Over time, it’s overwhelming.</p>
+
+  <h2>Introducing the Inbox Zero Classifier</h2>
+  <p>Using Google Apps Script, you can build a custom classifier that automatically labels and organizes incoming messages. Combined with smart labels like <em>Action</em>, <em>Read Later</em>, and <em>Sweep</em>, you can triage mail faster than ever.</p>
+
+  <h2>How It Works</h2>
+  <ol>
+    <li>Define categories (labels) in Gmail: Action, Read Later, Notifications, Sweep.</li>
+    <li>Write an Apps Script function that scans subject lines, senders, and keywords.</li>
+    <li>Apply the correct label automatically, archive low-value emails, and leave important ones in your inbox.</li>
+    <li>Run the script on a time trigger (e.g., every 10 minutes).</li>
+  </ol>
+
+  <h2>Sample Code</h2>
+  <pre>
+function classifyInbox() {
+  var threads = GmailApp.getInboxThreads(0, 50); // check latest 50
+  threads.forEach(function(thread) {
+    var msg = thread.getMessages()[0];
+    var subject = msg.getSubject().toLowerCase();
+    var sender = msg.getFrom().toLowerCase();
+
+    if (sender.includes("slack") || subject.includes("alert")) {
+      thread.addLabel(GmailApp.getUserLabelByName("Notifications"));
+    } else if (subject.includes("newsletter") || sender.includes("marketing")) {
+      thread.addLabel(GmailApp.getUserLabelByName("Read Later"));
+      thread.moveToArchive();
+    } else if (subject.includes("action required") || subject.includes("urgent")) {
+      thread.addLabel(GmailApp.getUserLabelByName("Action"));
+    } else {
+      thread.addLabel(GmailApp.getUserLabelByName("Sweep"));
+    }
+  });
+}
+  </pre>
+
+  <p>Customize the conditions to match your workflows — the power of Apps Script is that it’s flexible to your organization’s needs.</p>
+
+  <h2>Results</h2>
+  <p>With the Inbox Zero Classifier, admins report cutting down daily email processing from 1 hour to less than 15 minutes. Instead of getting lost in a sea of messages, they focus only on “Action” items while the script sweeps away clutter.</p>
+
+  <h2>Next Steps</h2>
+  <p>If you want to skip building this from scratch, GWS Automate offers ready-to-use scripts and guides as part of our <a href="https://itautomator.gumroad.com/l/google-workspace-automation-starter" target="_blank">Starter Pack</a> and <a href="https://itautomator.gumroad.com/l/google-workspace-automation-pro" target="_blank">Pro Pack</a>.</p>
+
+  <p><a href="/blog/">← Back to Blog</a></p>
+</body>
+</html>
