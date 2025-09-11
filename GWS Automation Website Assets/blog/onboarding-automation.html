@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How to Automate Google Workspace Onboarding with Apps Script | GWS Automate</title>
+    <meta name="description"
+        content="Learn how to automate Google Workspace onboarding with Apps Script. Step-by-step guide to save IT admins 30+ minutes per new hire." />
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            max-width: 800px;
+            color: #111;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            margin-top: 24px;
+            font-size: 22px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>How to Automate Google Workspace Onboarding with Apps Script</h1>
+    <p><em>Published: September 2025 · Author: GWS Automate</em></p>
+
+    <p>Onboarding a new hire in Google Workspace can take up to 30 minutes — creating accounts, assigning groups,
+        configuring email settings. Multiply that by dozens of employees and it’s a major time sink. In this post, I’ll
+        show you how a simple automation script can cut that down to 5 minutes.</p>
+
+    <h2>The Problem with Manual Onboarding</h2>
+    <p>Most IT admins follow a manual checklist when setting up a new user. It’s slow, error-prone, and inconsistent
+        across admins. Common tasks include:</p>
+    <ul>
+        <li>Creating the user in Admin Console</li>
+        <li>Placing them in the correct Organizational Unit (OU)</li>
+        <li>Adding them to groups (e.g., All Staff, Teams, Departments)</li>
+        <li>Configuring Gmail signatures or filters</li>
+    </ul>
+    <p>While these tasks are simple, repeating them hundreds of times wastes hours of valuable IT time.</p>
+
+    <h2>Why Automate with Google Apps Script</h2>
+    <p>Google Apps Script is built into Workspace and allows you to connect directly with the Admin SDK. With a few
+        lines of code, you can standardize the onboarding process and make it repeatable.</p>
+
+    <h2>Step-by-Step Guide</h2>
+    <h3>1. Enable Admin SDK API</h3>
+    <p>In the Google Cloud Console, enable the Admin SDK API for your Workspace environment. This allows Apps Script to
+        interact with user accounts.</p>
+
+    <h3>2. Prepare a CSV Template</h3>
+    <p>Create a simple CSV with headers like:</p>
+    <pre>
+First Name,Last Name,Work Email,OU Path,Groups
+Jane,Doe,jane.doe@example.com,/Employees,staff@example.com;hr@example.com
+  </pre>
+
+    <h3>3. Write the Apps Script</h3>
+    <p>Here’s a starter snippet to create users automatically:</p>
+    <pre>
+function createUser() {
+  var user = {
+    name: { givenName: "Jane", familyName: "Doe" },
+    password: "SecurePass123",
+    primaryEmail: "jane.doe@example.com",
+    orgUnitPath: "/Employees"
+  };
+  AdminDirectory.Users.insert(user);
+}
+  </pre>
+    <p>This can be expanded to read from your CSV and loop over new hires.</p>
+
+    <h3>4. Test & Deploy</h3>
+    <p>Run the script with a test user first. Once confirmed, you can deploy it with a Google Sheet + Apps Script
+        trigger to onboard multiple users at once.</p>
+
+    <h2>Real-World Results</h2>
+    <p>At GWS Automate, our Starter Pack reduced onboarding time by 80% in client environments. Instead of 30 minutes
+        per new hire, IT admins now spend less than 5 minutes per setup.</p>
+
+    <h2>Common Issues & Fixes</h2>
+    <ul>
+        <li><strong>API Permissions:</strong> Ensure Admin SDK is enabled in Google Cloud.</li>
+        <li><strong>Timeouts:</strong> Batch user creation instead of running too many at once.</li>
+        <li><strong>CSV Errors:</strong> Validate formatting to avoid skipped users.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Onboarding doesn’t have to be a repetitive chore. With Apps Script, you can automate account creation, group
+        assignments, and more — saving time and reducing errors.</p>
+    <p><strong>Next step:</strong> Want ready-to-use scripts, templates, and guides? Check out our <a
+            href="https://itautomator.gumroad.com/l/google-workspace-automation-starter" target="_blank">Starter
+            Pack</a> or <a href="https://itautomator.gumroad.com/l/google-workspace-automation-pro" target="_blank">Pro
+            Pack</a>.</p>
+
+    <p><a href="/index.html">← Back to Home</a></p>
+</body>
+
+</html>

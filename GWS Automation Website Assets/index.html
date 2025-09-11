@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GWS Automate – Google Workspace Automation Packs</title>
+    <meta name="description"
+        content="Google Workspace automation packs & AI tools for IT admins and consultants. Starter & Pro packs to save 10+ hours/week." />
+
+    <!-- Open Graph for link previews -->
+    <meta property="og:title" content="GWS Automate – Google Workspace Automation Packs">
+    <meta property="og:description"
+        content="Save 10+ hours/week with ready-to-use Google Workspace onboarding & offboarding scripts. Starter & Pro packs available.">
+    <meta property="og:image" content="https://gwsautomate.com/banner.png">
+    <meta property="og:url" content="https://gwsautomate.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        :root {
+            --bg: #0c0f13;
+            --card: #12161c;
+            --muted: #9fb3c8;
+            --text: #e6eef6;
+            --accent: #4ea1ff;
+            --accent-2: #7ee787;
+            --border: #1f2530;
+        }
+
+        [data-theme="light"] {
+            --bg: #f7f9fc;
+            --card: #ffffff;
+            --muted: #4b5563;
+            --text: #111827;
+            --accent: #2563eb;
+            --accent-2: #059669;
+            --border: #d1d5db;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+            line-height: 1.5
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 0
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #0f2a44, #1d3b66 55%, #0f2a44);
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .35);
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: .5px
+        }
+
+        .brand h1 {
+            font-size: 18px;
+            margin: 0
+        }
+
+        .top-cta a {
+            display: inline-block;
+            padding: 10px 14px;
+            background: var(--accent);
+            color: #031120;
+            border-radius: 10px;
+            font-weight: 600;
+            border: 1px solid #2c79c7
+        }
+
+        .top-cta a:hover {
+            filter: brightness(1.05);
+            text-decoration: none
+        }
+
+        .toggle {
+            margin-left: 16px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .hero {
+            padding: 40px 0 12px;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 28px;
+            align-items: center
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            line-height: 1.15;
+            margin: 0 0 12px
+        }
+
+        .hero p.lead {
+            color: var(--muted);
+            margin: 0 0 20px
+        }
+
+        .hero .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            font-weight: 650
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #061425;
+            border-color: #2c79c7
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text)
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 12px;
+            margin-right: 8px
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 22px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px
+        }
+
+        .card h3 {
+            margin: 0 0 8px
+        }
+
+        .check {
+            color: var(--accent-2);
+            margin-right: 8px
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .section {
+            padding: 30px 0
+        }
+
+        .section h2 {
+            margin-top: 0;
+            font-size: 24px
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px
+        }
+
+        .badge {
+            font-size: 12px;
+            color: #02120a;
+            background: var(--accent-2);
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-weight: 700
+        }
+
+        form {
+            margin-top: 16px
+        }
+
+        input[type="email"] {
+            padding: 10px;
+            width: 70%;
+            max-width: 280px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-right: 8px
+        }
+
+        button[type="submit"] {
+            padding: 10px 14px;
+            background: var(--accent);
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+            padding: 22px 0;
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 10px
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr
+            }
+
+            .steps {
+                grid-template-columns: 1fr
+            }
+
+            .hero h2 {
+                font-size: 30px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="brand-logo">GA</div>
+                <h1>GWS Automate</h1>
+                <div class="top-cta">
+                    <a href="#packs">Get Started</a>
+                    <a style="margin-left:12px" href="/blog/">Blog</a>
+                </div>
+
+                <span class="toggle" onclick="toggleTheme()">☀/🌙</span>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div>
+                <span class="tag">Google Workspace · Automation · AI</span>
+                <h2>Save 10+ Hours/Week with Ready-to-Use Google Workspace Automation</h2>
+                <p class="lead">Onboarding, offboarding, and AI-powered scripts built for IT admins & consultants.
+                    Deploy in minutes — not weeks.</p>
+                <div class="cta-row">
+                    <a class="btn btn-primary"
+                        href="https://itautomator.gumroad.com/l/google-workspace-automation-starter" target="_blank">Get
+                        Starter – $49</a>
+                    <a class="btn btn-ghost" href="https://itautomator.gumroad.com/l/google-workspace-automation-pro"
+                        target="_blank">Get Pro – $99</a>
+                </div>
+                <p class="note">Payments & delivery handled securely by Gumroad.</p>
+            </div>
+            <div class="card">
+                <h3>What’s included</h3>
+                <div class="card-grid">
+                    <div>
+                        <p><span class="check">✔</span>Onboarding automation</p>
+                        <p><span class="check">✔</span>Offboarding automation</p>
+                    </div>
+                    <div>
+                        <p><span class="check">✔</span>CSV templates + setup guide</p>
+                        <p><span class="check">✔</span>MIT license</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="packs" class="section">
+            <h2>Choose Your Pack</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <span class="badge">Starter</span>
+                    <h3>Starter Pack – $49</h3>
+                    <ul class="muted">
+                        <li>Onboarding & offboarding automations</li>
+                        <li>CSV templates + PDF README</li>
+                        <li>No AI features</li>
+                    </ul>
+                    <div class="cta-row">
+                        <a class="btn btn-primary"
+                            href="https://itautomator.gumroad.com/l/google-workspace-automation-starter"
+                            target="_blank">Get Starter</a>
+
+                    </div>
+                </div>
+                <div class="card" style="border-color:#285a2e">
+                    <span class="badge">Most Popular</span>
+                    <h3>Pro Pack – $99</h3>
+                    <ul class="muted">
+                        <li>Everything in Starter</li>
+                        <li>AI welcome & farewell email drafts</li>
+                        <li>Inbox Zero classifier</li>
+                    </ul>
+                    <div class="cta-row">
+                        <a class="btn btn-primary"
+                            href="https://itautomator.gumroad.com/l/google-workspace-automation-pro" target="_blank">Get
+                            Pro</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how" class="section">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step"><strong>1) Purchase & Download</strong>
+                    <p class="muted">Instant access via Gumroad.</p>
+                </div>
+                <div class="step"><strong>2) Configure</strong>
+                    <p class="muted">Set script properties, enable Admin SDK.</p>
+                </div>
+                <div class="step"><strong>3) Automate</strong>
+                    <p class="muted">Run onboarding/offboarding with one click.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Join the Mailing List</h2>
+            <p class="muted">Get updates on new automations, scripts, and consulting availability.</p>
+            <form action="#" method="post">
+                <input type="email" placeholder="Enter your email" required />
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+
+        <section class="section">
+            <h2>Consulting & Custom Automations</h2>
+            <p class="muted">Need help tailoring these to your environment? Book a consult or request a custom script.
+                (Coming soon via Gumroad.)</p>
+            <div class="cta-row"><a class="btn" href="mailto:info@gwsautomate.com">Contact</a></div>
+        </section>
+
+        <footer>
+            <div class="muted">
+                Built by Steve’s IT Solutions. |
+                <a href="/privacy.html">Privacy</a> ·
+                <a href="/terms.html">Terms</a> ·
+                <a href="/blog/">Blog</a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('y').textContent = new Date().getFullYear();
+        function toggleTheme() { document.body.dataset.theme = document.body.dataset.theme === "light" ? "dark" : "light" }
+    </script>
+</body>
+
+</html>

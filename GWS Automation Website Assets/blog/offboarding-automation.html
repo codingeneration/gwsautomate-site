@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How to Automate Google Workspace Offboarding with Apps Script | GWS Automate</title>
+    <meta name="description"
+        content="Step-by-step guide to automate Google Workspace offboarding with Apps Script. Secure account closure, data transfers, and group removals in minutes." />
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            max-width: 800px;
+            color: #111;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            margin-top: 24px;
+            font-size: 22px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>How to Automate Google Workspace Offboarding with Apps Script</h1>
+    <p><em>Published: September 2025 · Author: GWS Automate</em></p>
+
+    <p>When an employee leaves, IT admins must secure their Google Workspace account quickly. Delays can mean lingering
+        access to email, documents, and company data. In this post, I’ll walk through how to automate Workspace
+        offboarding with Apps Script to reduce errors and save hours.</p>
+
+    <h2>The Problem with Manual Offboarding</h2>
+    <p>Manual offboarding often looks like a checklist:</p>
+    <ul>
+        <li>Resetting passwords</li>
+        <li>Revoking group memberships</li>
+        <li>Transferring Google Drive files</li>
+        <li>Setting up email forwarding & auto-replies</li>
+        <li>Suspending or deleting the account</li>
+    </ul>
+    <p>When rushed, steps get skipped — creating security risks and lost data.</p>
+
+    <h2>Why Automate Offboarding</h2>
+    <p>Automation ensures every step happens the same way, every time. By using Google Apps Script with the Admin SDK,
+        IT admins can:</p>
+    <ul>
+        <li>Secure accounts immediately</li>
+        <li>Transfer ownership of documents</li>
+        <li>Apply consistent policies across all users</li>
+    </ul>
+
+    <h2>Step-by-Step Guide</h2>
+    <h3>1. Suspend the User</h3>
+    <pre>
+function suspendUser(userKey) {
+  var user = { suspended: true };
+  AdminDirectory.Users.update(user, userKey);
+}
+  </pre>
+
+    <h3>2. Transfer Google Drive Files</h3>
+    <pre>
+function transferDrive(oldUser, newOwner) {
+  AdminDirectory.Files.insert({
+    oldOwnerUserEmail: oldUser,
+    newOwnerUserEmail: newOwner
+  });
+}
+  </pre>
+
+    <h3>3. Set Email Forwarding</h3>
+    <pre>
+function setForwarding(userKey, forwardTo) {
+  Gmail.Users.Settings.ForwardingAddresses.create(
+    { forwardingEmail: forwardTo },
+    userKey
+  );
+}
+  </pre>
+
+    <h3>4. Add Auto-Reply</h3>
+    <p>Set a vacation responder letting contacts know the employee has left and who to reach instead.</p>
+
+    <h3>5. Remove Group Memberships</h3>
+    <p>Loop through groups and remove the user automatically.</p>
+
+    <h2>Real-World Results</h2>
+    <p>With automation, offboarding went from a 25-minute checklist to a single script execution. IT admins save hours
+        weekly and reduce the chance of sensitive accounts being left active.</p>
+
+    <h2>Common Issues & Fixes</h2>
+    <ul>
+        <li><strong>File Transfers:</strong> Ensure the destination account has enough storage.</li>
+        <li><strong>Email Forwarding:</strong> Must be allowed in Gmail settings.</li>
+        <li><strong>Suspension vs. Deletion:</strong> Best practice is to suspend first, then delete after data
+            retention is handled.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Manual offboarding creates risk. Automating it with Apps Script ensures consistency, security, and peace of mind.
+        Combined with onboarding automation, IT admins can save 10+ hours per week.</p>
+    <p><strong>Next step:</strong> Want prebuilt scripts and templates for onboarding & offboarding? Check out our <a
+            href="https://itautomator.gumroad.com/l/google-workspace-automation-starter" target="_blank">Starter
+            Pack</a> or <a href="https://itautomator.gumroad.com/l/google-workspace-automation-pro" target="_blank">Pro
+            Pack</a>.</p>
+
+    <p><a href="/index.html">← Back to Home</a></p>
+</body>
+
+</html>
