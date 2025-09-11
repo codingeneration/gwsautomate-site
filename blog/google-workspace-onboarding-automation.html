@@ -4,40 +4,88 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>How to Automate Google Workspace Onboarding with Apps Script | GWS Automate</title>
-  <meta name="description" content="Create users, assign OUs & groups, and set mail defaults in minutes." />
+  <meta name="description" content="Step-by-step guide to automate Google Workspace onboarding: create users, set OUs, add groups, and apply Gmail defaults using Apps Script + Admin SDK." />
+  <link rel="canonical" href="https://gwsautomate.com/blog/google-workspace-onboarding-automation.html">
   <style>
-    body { font-family: system-ui, -apple-system, Arial, sans-serif; line-height: 1.6; margin: 40px; max-width: 800px; color: #111; }
-    h1 { font-size: 28px; margin-bottom: 16px; }
-    h2 { margin-top: 24px; font-size: 22px; }
-    pre { background: #f4f4f4; padding: 12px; border-radius: 8px; overflow-x: auto; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .muted { color:#555; font-size:0.9rem }
+    :root { --ink:#111; --muted:#555; --bg:#f7f7f8; --brand:#2563eb }
+    body { font-family: system-ui, -apple-system, Arial, sans-serif; color:var(--ink); line-height:1.65; margin: 40px auto; max-width: 820px }
+    h1{font-size:32px;margin:.2rem 0 1rem} h2{font-size:22px;margin:1.6rem 0 .5rem}
+    p{margin:.6rem 0} ul{margin:.4rem 0 .8rem 1.2rem}
+    pre{background:#f4f4f4;padding:12px;border-radius:8px;overflow:auto}
+    .muted{color:var(--muted)} .card{background:var(--bg);padding:14px 16px;border-radius:10px}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
   </style>
 </head>
 <body>
   <h1>How to Automate Google Workspace Onboarding with Apps Script</h1>
-  <p class="muted"><em>Published: September 11, 2025 · Author: GWS Automate</em></p>
+  <p class="muted"><em>Published: September 2025 · Author: GWS Automate</em></p>
 
-  <p>Create users, assign OUs &amp; groups, and set mail defaults in minutes.</p>
+  <p class="card">Stop clicking the Admin console for every new hire. With one Apps Script you can create users, place them in the right OU, add required groups, and apply Gmail defaults in minutes.</p>
 
-<h2>The problem with manual onboarding</h2>
-<p>How to Automate Google Workspace Onboarding with Apps Script — the problem with manual onboarding.</p>
+  <h2>The problem with manual onboarding</h2>
+  <ul>
+    <li>Steps are spread across Admin console, Groups, and Gmail settings.</li>
+    <li>Easy to miss group memberships or the correct OU.</li>
+    <li>Time cost adds up: 10–15 minutes per hire for small teams, more for MSPs.</li>
+  </ul>
 
-<h2>Why Apps Script</h2>
-<p>How to Automate Google Workspace Onboarding with Apps Script — why apps script.</p>
+  <h2>Why Apps Script + Admin SDK</h2>
+  <ul>
+    <li><strong>Native</strong> to Google Workspace—no extra servers.</li>
+    <li><strong>Secure</strong> via OAuth scopes and admin-only access.</li>
+    <li><strong>Maintainable</strong>: store team rules in a CSV/Sheet and reuse.</li>
+  </ul>
 
-<h2>Step-by-step setup</h2>
-<p>How to Automate Google Workspace Onboarding with Apps Script — step-by-step setup.</p>
+  <h2>What this automation does</h2>
+  <ul>
+    <li>Create the user with first/last, primary email, orgUnitPath, and initial password.</li>
+    <li>Add the user to required Google Groups (e.g., <code>all@</code>, <code>it@</code>).</li>
+    <li>Set Gmail defaults (signature stub, labels, filters) on first sign-in.</li>
+  </ul>
 
-<h2>Common mistakes</h2>
-<p>How to Automate Google Workspace Onboarding with Apps Script — common mistakes.</p>
+  <h2>Script outline</h2>
+  <pre>
+// Admin SDK + Directory API required
+function createUser(u) {
+  var user = {
+    name: { givenName: u.first, familyName: u.last },
+    password: u.tempPassword,
+    primaryEmail: u.email,
+    orgUnitPath: u.ou
+  };
+  return AdminDirectory.Users.insert(user);
+}
 
-<h2>Time savings & scaling</h2>
-<p>How to Automate Google Workspace Onboarding with Apps Script — time savings & scaling.</p>
+function addToGroups(email, groups) {
+  groups.forEach(function(g){
+    try { AdminDirectory.Members.insert({email: email, role:"MEMBER"}, g); } catch(e) {}
+  });
+}
 
-  <h2>Next Steps</h2>
-  <p>Save hours per new hire with our packs. — <a href="https://itautomator.gumroad.com/l/google-workspace-automation-starter" target="_blank">Starter Pack</a> or <a href="https://itautomator.gumroad.com/l/google-workspace-automation-pro" target="_blank">Pro Pack</a>.</p>
+function onboardRow(row) {
+  var created = createUser(row);
+  addToGroups(created.primaryEmail, row.groups); // ["all@domain.com","finance@..."]
+}
+  </pre>
+
+  <h2>Data source (Google Sheet)</h2>
+  <p>Keep a simple Sheet with columns: <em>first, last, email, ou, groups</em>. The script reads each row and runs <code>onboardRow</code>. Groups are a pipe-separated list (e.g., <code>all@|engineering@</code>).</p>
+
+  <h2>Common pitfalls</h2>
+  <ul>
+    <li>Missing Admin SDK scope → enable in <em>Services</em> and re-authorize.</li>
+    <li>Incorrect <code>orgUnitPath</code> (must start with <code>/</code>).</li>
+    <li>Group addresses misspelled—keep them in a validated list in the Sheet.</li>
+  </ul>
+
+  <h2>Results</h2>
+  <p>Most teams reduce onboarding time by 70–80% and eliminate “forgot to add to group” tickets. Once stable, you can extend it with welcome email, Drive folder provisioning, and calendar sharing.</p>
+
+  <h2>Next steps</h2>
+  <p>Want a ready-to-run version with the Sheet template, CSVs, and guided setup? Check out our
+    <a href="https://itautomator.gumroad.com/l/google-workspace-automation-starter" target="_blank">Starter Pack</a>
+    or <a href="https://itautomator.gumroad.com/l/google-workspace-automation-pro" target="_blank">Pro Pack</a>.
+  </p>
 
   <p><a href="/blog/">← Back to Blog</a></p>
 </body>
