@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main site -->
   <url>
     <loc>https://gwsautomate.com/</loc>
-    <lastmod>2025-09-11</lastmod>
     <priority>1.0</priority>
   </url>
+
+  <!-- Legal -->
   <url>
     <loc>https://gwsautomate.com/privacy.html</loc>
-    <lastmod>2025-09-11</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://gwsautomate.com/terms.html</loc>
-    <lastmod>2025-09-11</lastmod>
     <priority>0.5</priority>
   </url>
+
+  <!-- Blog index -->
   <url>
-    <loc>https://gwsautomate.com/blog/onboarding-automation.html</loc>
-    <lastmod>2025-09-11</lastmod>
+    <loc>https://gwsautomate.com/blog/</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Blog posts -->
+  <url>
+    <loc>https://gwsautomate.com/blog/inbox-zero-classifier.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gwsautomate.com/blog/offboarding-automation.html</loc>
-    <lastmod>2025-09-11</lastmod>
+    <loc>https://gwsautomate.com/blog/google-workspace-onboarding-automation.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gwsautomate.com/blog/google-workspace-offboarding-automation.html</loc>
     <priority>0.8</priority>
   </url>
 </urlset>
