@@ -1,22 +1,48 @@
-name: Generate weekly blog post
+name: Generate blog and deploy (external CI)
+
 on:
   schedule:
-    - cron: "0 14 * * 1"   # Mondays 14:00 UTC
+    - cron: "0 14 * * 1"     # Mondays 14:00 UTC
   workflow_dispatch:
+  push:
+    branches: [ main ]
+
 permissions:
   contents: write
+
 jobs:
-  generate:
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Generate a new post and rebuild blog index/sitemap
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
-      - run: python scripts/generate_post.py
-      - run: |
+      - name: Generate post
+        run: |
+          python scripts/generate_post.py
+
+      # Commit blog changes back to repo (optional but nice)
+      - name: Commit blog changes
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add blog/*.html blog/index.html sitemap.xml || true
-          git commit -m "Auto-generate blog post $(date -u +'%Y-%m-%d')" || echo "No changes"
-          git push
+          git commit -m "chore: auto-generate blog $(date -u +'%Y-%m-%d')" || echo "No changes"
+          git push || true
+
+      # Deploy to Netlify via CLI (bypasses Netlify build minutes)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install netlify-cli
+        run: npm i -g netlify-cli
+      - name: Netlify deploy (external CI)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          netlify deploy --dir . --prod --message "External CI deploy $(date -u +'%Y-%m-%d %H:%M:%S UTC')" \
+            --site "$NETLIFY_SITE_ID" --auth "$NETLIFY_AUTH_TOKEN"
