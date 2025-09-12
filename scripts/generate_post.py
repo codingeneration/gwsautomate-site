@@ -28,7 +28,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   gtag('config', 'G-4HY7P3F737');
 </script>
-  
   <style>
     :root {{ --ink:#111; --muted:#555; --brand:#2563eb; --bg:#f7f7f8; }}
     body {{ font-family: system-ui, -apple-system, Arial, sans-serif; color:var(--ink); line-height:1.65; margin: 40px auto; max-width: 820px }}
