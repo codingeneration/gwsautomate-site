@@ -419,7 +419,10 @@
         </footer>
     </div>
     <script>
-        document.getElementById('y').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', () => {
+  const year = document.getElementById('year');
+  if (year) year.textContent = new Date().getFullYear();
+});
         function toggleTheme() { document.body.dataset.theme = document.body.dataset.theme === "light" ? "dark" : "light" }
     </script>
 </body>
