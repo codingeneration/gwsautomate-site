@@ -19,6 +19,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title} | GWS Automate</title>
   <meta name="description" content="{meta_desc}" />
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4HY7P3F737"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4HY7P3F737');
+</script>
+  
   <style>
     :root {{ --ink:#111; --muted:#555; --brand:#2563eb; --bg:#f7f7f8; }}
     body {{ font-family: system-ui, -apple-system, Arial, sans-serif; color:var(--ink); line-height:1.65; margin: 40px auto; max-width: 820px }}
