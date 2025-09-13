@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inbox Zero for Gmail — GWS Automate</title>
+  <meta name="description" content="Automate Gmail cleanup and labeling to reach Inbox Zero every day. Inspired by Jeff Su. Ready-to-use Google Apps Script with one-page setup guide." />
+  <link rel="canonical" href="https://gwsautomate.com/inboxzero" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Inbox Zero for Gmail — GWS Automate" />
+  <meta property="og:description" content="Automate Gmail cleanup and labeling to reach Inbox Zero every day. Inspired by Jeff Su." />
+  <meta property="og:type" content="product" />
+  <meta property="og:url" content="https://gwsautomate.com/inboxzero" />
+  <meta property="og:image" content="https://gwsautomate.com/inboxzero-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Minimal, scoped styles -->
+  <style>
+    :root { --iz-bg:#0b1016; --iz-panel:#0f141b; --iz-border:#1f2a36; --iz-text:#e6eef8; --iz-sub:#9eb1c7; --iz-accent:#3b82f6; --iz-good:#10b981; }
+    body.iz { margin:0; background:var(--iz-bg); color:var(--iz-text); font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+    .iz-wrap { max-width:940px; margin:0 auto; padding:32px 20px 64px; }
+    .iz-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
+    .iz-a { color:var(--iz-accent); text-decoration:none; }
+    .iz-a:hover { text-decoration:underline; }
+
+    .iz-hero { background:var(--iz-panel); border:1px solid var(--iz-border); border-radius:16px; padding:28px; display:grid; gap:10px; text-align:center; }
+    .iz-badge { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.3px; color:#b9d8ff; background:#0e1724; border:1px solid #305fae; padding:4px 10px; border-radius:999px; }
+    .iz-h1 { margin:0; font-size:28px; line-height:1.2; }
+    .iz-sub { margin:0; color:var(--iz-sub); }
+
+    .iz-hero img { display:block; margin:16px auto 0 auto; max-width:420px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,.35); }
+
+    .iz-grid { margin-top:26px; display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+    .iz-card { background:var(--iz-panel); border:1px solid var(--iz-border); border-radius:14px; padding:18px; }
+    .iz-card h3 { margin:0 0 8px 0; font-size:18px; }
+    .iz-list { margin:0; padding-left:20px; }
+    .iz-note { color:var(--iz-sub); font-size:14px; margin-top:8px; }
+
+    .iz-cta { margin-top:24px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:center; }
+    .iz-btn { display:inline-block; background:var(--iz-accent); color:#fff; font-weight:700; padding:12px 16px; border-radius:10px; text-decoration:none; }
+    .iz-btn:hover { filter:brightness(1.07); }
+    .iz-price { font-weight:700; color:var(--iz-good); }
+
+    .iz-faq h4{ margin:0 0 6px 0; }
+    .iz-footer { margin-top:36px; color:var(--iz-sub); font-size:14px; text-align:center; }
+
+    /* Gumroad embed alignment */
+    .gumroad-product-embed a { display:inline-block; padding:12px 16px; border-radius:10px; background:var(--iz-accent); color:#fff; text-decoration:none; font-weight:700; }
+    .gumroad-product-embed a:hover { filter:brightness(1.07); }
+  </style>
+
+  <!-- GA4 (your ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4HY7P3F737"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date()); gtag('config','G-4HY7P3F737');
+  </script>
+</head>
+<body class="iz">
+  <div class="iz-wrap">
+    <nav class="iz-nav">
+      <a class="iz-a" href="/">← Back to Home</a>
+      <a class="iz-a" href="https://itautomator.gumroad.com/" target="_blank">Store</a>
+    </nav>
+
+    <section class="iz-hero">
+      <span class="iz-badge">Add-on</span>
+      <h1 class="iz-h1">Inbox Zero for Gmail</h1>
+      <p class="iz-sub">Automate Gmail cleanup & labeling to reach Inbox Zero every day. Inspired by Jeff Su. Includes ready-to-use Apps Script + one-page setup guide.</p>
+      <img src="/inboxzero-cover.png" alt="Inbox Zero Cover" />
+      <div class="iz-cta">
+        <div class="gumroad-product-embed">
+          <!-- Replace l/inboxzero with your exact Gumroad slug -->
+          <a href="https://itautomator.gumroad.com/l/inboxzero">Buy Inbox Zero — $39</a>
+        </div>
+        <span class="iz-price">Instant download • Runs via Google Apps Script</span>
+      </div>
+    </section>
+
+    <section class="iz-grid">
+      <div class="iz-card">
+        <h3>Why it helps</h3>
+        <ul class="iz-list">
+          <li>Auto-labels & organizes new emails</li>
+          <li>Archives/snoozes low-priority messages</li>
+          <li>Highlights important senders</li>
+        </ul>
+      </div>
+      <div class="iz-card">
+        <h3>What’s included</h3>
+        <ul class="iz-list">
+          <li>Gmail automation script (Code.gs)</li>
+          <li>One-page professional setup guide (PDF)</li>
+          <li>License for personal & client use</li>
+        </ul>
+        <p class="iz-note">Works with Gmail & Google Workspace. Set up in minutes.</p>
+      </div>
+    </section>
+
+    <section class="iz-card iz-faq" style="margin-top:16px;">
+      <h3>FAQ</h3>
+      <h4>Do I need to be technical?</h4>
+      <p>Basic copy/paste into Google Apps Script. The guide walks you through it.</p>
+      <h4>Can I customize the rules?</h4>
+      <p>Yes—adjust labels, senders, and actions inside the script.</p>
+      <h4>Does this run automatically?</h4>
+      <p>Yes—set a daily or hourly trigger in Apps Script.</p>
+    </section>
+
+    <footer class="iz-footer">© 2025 GWS Automate</footer>
+  </div>
+
+  <!-- Gumroad embed script -->
+  <script src="https://gumroad.com/js/gumroad.js"></script>
+</body>
+</html>
