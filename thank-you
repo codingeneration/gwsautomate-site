@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You – GWS Automate</title>
+  <meta name="robots" content="noindex">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background-color: #0c0f13;
+      color: #e6eef6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 12px;
+      color: #4ea1ff;
+    }
+    p {
+      font-size: 18px;
+      max-width: 500px;
+      margin-bottom: 20px;
+    }
+    a {
+      color: #4ea1ff;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>✅ Thank You for Your Purchase!</h1>
+  <p>Your automation pack is on the way. Check your email for a download link from <strong>Gumroad</strong>.</p>
+  <p>Want more automations? <a href="https://gwsautomate.com">Return to Home</a></p>
+
+  <!-- Google Ads Conversion Tag Placeholder -->
+  <!-- Replace with your real tag from Google Ads -->
+  <script>
+    // Example GA4 conversion event
+    gtag('event', 'purchase', {
+      'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+      'value': 99.00,
+      'currency': 'USD',
+      'transaction_id': ''
+    });
+  </script>
+</body>
+</html>
