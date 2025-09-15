@@ -25,14 +25,14 @@
     function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     /* Replace with your Google Ads Conversion ID (starts with AW-) */
-    gtag('config', 'AW-XXXXXXXXXX');
+    gtag('config', 'AW-17557000407');
   </script>
 
   <!-- Google Ads Conversion event (fires on page load) -->
   <script>
     /* Replace the send_to with your own ID & LABEL from Google Ads */
     gtag('event', 'conversion', {
-      'send_to': 'AW-XXXXXXXXXX/CONVERSION_LABEL',
+      'send_to': 'AW-17557000407/CONVERSION_LABEL',
       // Optional: set a dynamic value if you sell multiple prices
       'value': 39.00,     // change to your product price
       'currency': 'USD',
