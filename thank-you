@@ -1,55 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Thank You – GWS Automate</title>
-  <meta name="robots" content="noindex">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background-color: #0c0f13;
-      color: #e6eef6;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 12px;
-      color: #4ea1ff;
-    }
-    p {
-      font-size: 18px;
-      max-width: 500px;
-      margin-bottom: 20px;
-    }
-    a {
-      color: #4ea1ff;
-      font-weight: 600;
-    }
-  </style>
-</head>
-<body>
-  <h1>✅ Thank You for Your Purchase!</h1>
-  <p>Your automation pack is on the way. Check your email for a download link from <strong>Gumroad</strong>.</p>
-  <p>Want more automations? <a href="https://gwsautomate.com">Return to Home</a></p>
+  <meta name="robots" content="noindex" />
 
-  <!-- Google Ads Conversion Tag Placeholder -->
-  <!-- Replace with your real tag from Google Ads -->
+  <style>
+    :root { --bg:#0c0f13; --text:#e6eef6; --muted:#9fb3c8; --accent:#4ea1ff; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--text);
+      font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+    .wrap { min-height:100vh; display:grid; place-items:center; padding:24px; text-align:center; }
+    h1 { margin:0 0 8px; font-size:32px; color:#ffffff; }
+    p { margin:0 0 12px; color:var(--muted); }
+    a { color:var(--accent); font-weight:600; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .cta { margin-top:16px; }
+  </style>
+
+  <!-- Google tag (gtag.js) — keep if not already loaded sitewide -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
   <script>
-    // Example GA4 conversion event
-    gtag('event', 'purchase', {
-      'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
-      'value': 99.00,
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    /* Replace with your Google Ads Conversion ID (starts with AW-) */
+    gtag('config', 'AW-XXXXXXXXXX');
+  </script>
+
+  <!-- Google Ads Conversion event (fires on page load) -->
+  <script>
+    /* Replace the send_to with your own ID & LABEL from Google Ads */
+    gtag('event', 'conversion', {
+      'send_to': 'AW-XXXXXXXXXX/CONVERSION_LABEL',
+      // Optional: set a dynamic value if you sell multiple prices
+      'value': 39.00,     // change to your product price
       'currency': 'USD',
-      'transaction_id': ''
+      'transaction_id': '' // you can leave blank
     });
   </script>
+</head>
+<body>
+  <div class="wrap">
+    <main>
+      <h1>✅ Thank you for your purchase!</h1>
+      <p>You’ll receive an email from <strong>Gumroad</strong> with your download link.</p>
+      <p class="cta"><a href="/">Return to Home</a> · <a href="/inboxzero">View Product Page</a></p>
+    </main>
+  </div>
 </body>
 </html>
